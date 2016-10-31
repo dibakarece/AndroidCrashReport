@@ -61,11 +61,12 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
         finalReportBuffer.append("\n\n===============/*/ Crash Tracked /*/=============\n\n");
 
         Log.e(TAG, finalReportBuffer.toString());
-        storeCrash(finalReportBuffer.toString(), new Date().toString());
+//        storeCrash(finalReportBuffer.toString(), new Date().toString());
 
-//        Intent intent = new Intent(context, ErrorReporterActivity.class);
-//        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//        context.startActivity(intent);
+        Intent intent = new Intent(context, CrashPostIntentService.class);
+        intent.putExtra(DBConstant.CRASHREPORT_FIELD_DATE, new Date().toString());
+        intent.putExtra(DBConstant.CRASHREPORT_FIELD_DETAIL, finalReportBuffer.toString());
+        context.startService(intent);
 
         android.os.Process.killProcess(android.os.Process.myPid());
         System.exit(10);

@@ -22,6 +22,8 @@
             android:authorities="com.crashreport.database.provider"
             android:exported="true" />
 
+        <service android:name=".handler.CrashPostIntentService" />
+
     </application>
 
 </manifest>
