@@ -64,8 +64,8 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
 //        storeCrash(finalReportBuffer.toString(), new Date().toString());
 
         Intent intent = new Intent(context, CrashPostIntentService.class);
-        intent.putExtra(DBConstant.CRASHREPORT_FIELD_DATE, new Date().toString());
-        intent.putExtra(DBConstant.CRASHREPORT_FIELD_DETAIL, finalReportBuffer.toString());
+//        intent.putExtra(DBConstant.CRASHREPORT_FIELD_DATE, new Date().toString());
+//        intent.putExtra(DBConstant.CRASHREPORT_FIELD_DETAIL, finalReportBuffer.toString());
         context.startService(intent);
 
         android.os.Process.killProcess(android.os.Process.myPid());
@@ -122,5 +122,76 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
             Log.i(TAG, e.getMessage());
         }
     }
+
+
+//    ===============/*/ Crash Report /*/=============
+//
+//            ====/*/ Crash Report Generated on : Mon Oct 31 19:24:34 GMT+05:30 2016
+//
+//                                                             ===============/*/ Device Information: /*/=============
+//
+//
+//                                                             VERSION		: 1.0
+//                                                             PACKAGE      : com.crashreport
+//                                                             FILE-PATH    :
+//                                                             PHONE-MODEL  : XT1033
+//                                                             ANDROID_VERS : 5.1
+//                                                             BOARD        : MSM8226
+//                                                             BRAND        : motorola
+//                                                             DEVICE       : falcon_umtsds
+//                                                             DISPLAY      : LPBS23.13-56-2
+//                                                             FINGER-PRINT : motorola/falcon_asia_ds/falcon_umtsds:5.1/LPBS23.13-56-2/2:user/release-keys
+//                                                             HOST         : ilclbld30
+//                                                             ID           : LPBS23.13-56-2
+//                                                             MODEL        : XT1033
+//                                                             PRODUCT      : falcon_asia_ds
+//                                                             MANUFACTURER : release-keys
+//                                                             TAGS         : XT1033
+//                                                             TIME         : 1456513470000
+//                                                             TYPE         : user
+//                                                             USER         : hudsoncm
+//
+//                                                             ===============/*/ Crash Causes /*/=============
+//
+//                                                             java.lang.RuntimeException: Unable to instantiate service com.crashreport.handler.CrashPostIntentService: java.lang.InstantiationException: class com.crashreport.handler.CrashPostIntentService has no zero argument constructor
+//                                                                 at android.app.ActivityThread.handleCreateService(ActivityThread.java:2776)
+//                                                                 at android.app.ActivityThread.access$1800(ActivityThread.java:155)
+//                                                                 at android.app.ActivityThread$H.handleMessage(ActivityThread.java:1400)
+//                                                                 at android.os.Handler.dispatchMessage(Handler.java:102)
+//                                                                 at android.os.Looper.loop(Looper.java:135)
+//                                                                 at android.app.ActivityThread.main(ActivityThread.java:5343)
+//                                                                 at java.lang.reflect.Method.invoke(Native Method)
+//                                                                 at java.lang.reflect.Method.invoke(Method.java:372)
+//                                                                 at com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:905)
+//                                                                 at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:700)
+//                                                              Caused by: java.lang.InstantiationException: class com.crashreport.handler.CrashPostIntentService has no zero argument constructor
+//                                                                 at java.lang.Class.newInstance(Class.java:1597)
+//                                                                 at android.app.ActivityThread.handleCreateService(ActivityThread.java:2773)
+//                                                                 at android.app.ActivityThread.access$1800(ActivityThread.java:155) 
+//                                                                 at android.app.ActivityThread$H.handleMessage(ActivityThread.java:1400) 
+//                                                                 at android.os.Handler.dispatchMessage(Handler.java:102) 
+//                                                                 at android.os.Looper.loop(Looper.java:135) 
+//                                                                 at android.app.ActivityThread.main(ActivityThread.java:5343) 
+//                                                                 at java.lang.reflect.Method.invoke(Native Method) 
+//                                                                 at java.lang.reflect.Method.invoke(Method.java:372) 
+//                                                                 at com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:905) 
+//                                                                 at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:700) 
+//                                                              Caused by: java.lang.NoSuchMethodException: <init> []
+//                                                                 at java.lang.Class.getConstructor(Class.java:531)
+//                                                                 at java.lang.Class.getDeclaredConstructor(Class.java:510)
+//                                                                 at java.lang.Class.newInstance(Class.java:1595)
+//                                                                 at android.app.ActivityThread.handleCreateService(ActivityThread.java:2773) 
+//                                                                 at android.app.ActivityThread.access$1800(ActivityThread.java:155) 
+//                                                                 at android.app.ActivityThread$H.handleMessage(ActivityThread.java:1400) 
+//                                                                 at android.os.Handler.dispatchMessage(Handler.java:102) 
+//                                                                 at android.os.Looper.loop(Looper.java:135) 
+//                                                                 at android.app.ActivityThread.main(ActivityThread.java:5343) 
+//                                                                 at java.lang.reflect.Method.invoke(Native Method) 
+//                                                                 at java.lang.reflect.Method.invoke(Method.java:372) 
+//                                                                 at com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:905) 
+//                                                                 at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:700) 
+//
+//
+//                                                             ===============/*/ Crash Tracked /*/=============
 
 }
