@@ -23,6 +23,7 @@
             android:exported="true" />
 
         <service android:name=".handler.CrashPostIntentService" />
+        <service android:name=".handler.CrashPostService" />
 
     </application>
 
