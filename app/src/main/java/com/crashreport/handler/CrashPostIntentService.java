@@ -15,20 +15,21 @@ public class CrashPostIntentService extends IntentService {
     public static final String TAG = CrashPostIntentService.class.getSimpleName();
     public Context context;
 
-    public CrashPostIntentService(String name) {
-        super(name);
+    public CrashPostIntentService() {
+        super("CrashPostIntentService");
         context = CrashPostIntentService.this;
     }
 
     @Override
     protected void onHandleIntent(Intent intent) {
         if (intent != null && intent.getExtras() != null) {
+            Log.i(TAG, "Hello Andorid");
             Bundle bundle = intent.getExtras();
             storeCrash(bundle.getString(DBConstant.CRASHREPORT_FIELD_DATE), bundle.getString(DBConstant.CRASHREPORT_FIELD_DETAIL));
         }
     }
 
-    private void storeCrash(final String details, final String date) {
+    private void storeCrash(final String date, final String details) {
         try {
             ContentValues contentValues = new ContentValues();
             contentValues.put(DBConstant.CRASHREPORT_FIELD_DATE, date);

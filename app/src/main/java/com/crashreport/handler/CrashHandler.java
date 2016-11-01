@@ -61,15 +61,10 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
         finalReportBuffer.append("\n\n===============/*/ Crash Tracked /*/=============\n\n");
 
         Log.e(TAG, finalReportBuffer.toString());
-//        storeCrash(finalReportBuffer.toString(), new Date().toString());
-
-        Intent intent = new Intent(context, CrashPostIntentService.class);
-//        intent.putExtra(DBConstant.CRASHREPORT_FIELD_DATE, new Date().toString());
-//        intent.putExtra(DBConstant.CRASHREPORT_FIELD_DETAIL, finalReportBuffer.toString());
-        context.startService(intent);
+//        storeCrash(new Date().toString(), finalReportBuffer.toString());
+        postDataToServer(new Date().toString(), finalReportBuffer.toString());
 
         android.os.Process.killProcess(android.os.Process.myPid());
-        System.exit(10);
     }
 
     private String getDeviceInfo() {
@@ -99,9 +94,6 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
             reportBuffer.append("\nTYPE         : ").append(Build.TYPE);
             reportBuffer.append("\nUSER         : ").append(Build.USER);
 
-//            infoStringBuffer.append("\nTOTAL-INTERNAL-MEMORY     : ").append(getTotalInternalMemorySize() + " mb");
-//            infoStringBuffer.append("\nAVAILABLE-INTERNAL-MEMORY : ").append(getAvailableInternalMemorySize() + " mb");
-
             return reportBuffer.toString();
         } catch (Exception e) {
             e.printStackTrace();
@@ -109,8 +101,13 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
         return "";
     }
 
-
-    private void storeCrash(final String details, final String date) {
+    /**
+     * After Crash store this crash data in local Data base for further operation
+     *
+     * @param details
+     * @param date
+     */
+    private void storeCrash(final String date, final String details) {
         try {
             ContentValues contentValues = new ContentValues();
             contentValues.put(DBConstant.CRASHREPORT_FIELD_DATE, date);
@@ -121,6 +118,19 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
             e.printStackTrace();
             Log.i(TAG, e.getMessage());
         }
+    }
+
+    /**
+     * After Crash send this crash details to the server
+     *
+     * @param details
+     * @param date
+     */
+    private void postDataToServer(final String date, final String details) {
+        Intent intent = new Intent(context, CrashPostIntentService.class);
+        intent.putExtra(DBConstant.CRASHREPORT_FIELD_DATE, date);
+        intent.putExtra(DBConstant.CRASHREPORT_FIELD_DETAIL, details);
+        context.startService(intent);
     }
 
 
